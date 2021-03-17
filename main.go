@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	nfqueue "github.com/florianl/go-nfqueue"
 	"time"
@@ -35,6 +36,11 @@ func main() {
 		fmt.Printf("nfqueue payload: %+v \n", *a.Payload)
 		fmt.Printf("hwAddress: %+v \n", *a.HwAddr)
 		fmt.Printf("hwProtocoal: %+v \n", *a.HwProtocol)
+		b, err := json.Marshal(*a.Payload)
+		if err != nil {
+			fmt.Println("error:", err)
+		}
+		fmt.Println(b)
 		nf.SetVerdict(id, nfqueue.NfAccept)
 		return 0
 	}
