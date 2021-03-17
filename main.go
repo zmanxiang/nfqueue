@@ -33,8 +33,8 @@ func main() {
 		// Just print out the id and payload of the nfqueue packet
 		//fmt.Printf("[%d]\t%v\n", id, *a.Payload)
 		//fmt.Printf("[%d]\t %s\n", id, *a.Payload)
-		fmt.Printf("nfqueue payload: %+v \n", *a.Payload)
-		fmt.Printf("hwAddress: %+v \n", *a.HwAddr)
+		fmt.Printf("nfqueue payload: %x \n", *a.Payload)
+		fmt.Printf("hwAddress: %x \n", *a.HwAddr)
 		fmt.Printf("hwProtocoal: %+v \n", *a.HwProtocol)
 		b, err := json.Marshal(*a.Payload)
 		if err != nil {
