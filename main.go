@@ -31,6 +31,7 @@ func main() {
 		id := *a.PacketID
 		// Just print out the id and payload of the nfqueue packet
 		fmt.Printf("[%d]\t%v\n", id, *a.Payload)
+		fmt.Printf("[%d]\t %s\n", id, *a.Payload)
 		nf.SetVerdict(id, nfqueue.NfAccept)
 		return 0
 	}
