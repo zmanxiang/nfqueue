@@ -32,7 +32,9 @@ func main() {
 		// Just print out the id and payload of the nfqueue packet
 		//fmt.Printf("[%d]\t%v\n", id, *a.Payload)
 		//fmt.Printf("[%d]\t %s\n", id, *a.Payload)
-		fmt.Printf("nfqueue data: %+v \n", a)
+		fmt.Printf("nfqueue payload: %+v \n", *a.Payload)
+		fmt.Printf("hwAddress: %+v \n", *a.HwAddr)
+		fmt.Printf("hwProtocoal: %+v \n", *a.HwProtocol)
 		nf.SetVerdict(id, nfqueue.NfAccept)
 		return 0
 	}
