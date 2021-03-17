@@ -2,13 +2,21 @@ package main
 
 import (
 	"context"
-	"encoding/json"
+	"encoding/hex"
 	"fmt"
-	nfqueue "github.com/florianl/go-nfqueue"
+	"github.com/florianl/go-nfqueue"
 	"time"
 )
 
 func main() {
+	for {
+		nfqueueListener()
+		fmt.Println("===== waiting for 10 seconds =====")
+		time.Sleep(10 * time.Second)
+	}
+}
+
+func nfqueueListener() {
 	config := nfqueue.Config{
 		NfQueue:      100,
 		MaxPacketLen: 0xFFFF,
@@ -31,16 +39,9 @@ func main() {
 	fn := func(a nfqueue.Attribute) int {
 		id := *a.PacketID
 		// Just print out the id and payload of the nfqueue packet
-		//fmt.Printf("[%d]\t%v\n", id, *a.Payload)
-		//fmt.Printf("[%d]\t %s\n", id, *a.Payload)
-		fmt.Printf("nfqueue payload: %x \n", *a.Payload)
-		fmt.Printf("hwAddress: %x \n", *a.HwAddr)
+		fmt.Printf("nfqueue payload: %v \n", convertPacketToString(*a.Payload))
+		fmt.Printf("hwAddress: %x \n", convertPacketToString(*a.HwAddr))
 		fmt.Printf("hwProtocoal: %+v \n", *a.HwProtocol)
-		b, err := json.Marshal(*a.Payload)
-		if err != nil {
-			fmt.Println("error:", err)
-		}
-		fmt.Println(b)
 		nf.SetVerdict(id, nfqueue.NfAccept)
 		return 0
 	}
@@ -54,4 +55,12 @@ func main() {
 
 	// Block till the context expires
 	<-ctx.Done()
+}
+
+func convertPacketToString(data []byte) string {
+	decoded, err := hex.DecodeString(string(data))
+	if err != nil {
+		return "error message"
+	}
+	return string(decoded);
 }
