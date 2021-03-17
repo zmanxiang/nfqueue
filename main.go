@@ -60,7 +60,7 @@ func nfqueueListener() {
 func convertPacketToString(data []byte) string {
 	decoded, err := hex.DecodeString(string(data))
 	if err != nil {
-		return "error message"
+		return err.Error()
 	}
-	return string(decoded);
+	return string(decoded)
 }
