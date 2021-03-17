@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"encoding/hex"
 	"fmt"
 	"github.com/florianl/go-nfqueue"
 	"time"
@@ -39,8 +38,8 @@ func nfqueueListener() {
 	fn := func(a nfqueue.Attribute) int {
 		id := *a.PacketID
 		// Just print out the id and payload of the nfqueue packet
-		fmt.Printf("nfqueue payload: %v \n", convertPacketToString(*a.Payload))
-		fmt.Printf("hwAddress: %x \n", convertPacketToString(*a.HwAddr))
+		fmt.Printf("nfqueue payload: %s \n", convertPacketToString(*a.Payload))
+		fmt.Printf("hwAddress: %s \n", convertPacketToString(*a.HwAddr))
 		fmt.Printf("hwProtocoal: %+v \n", *a.HwProtocol)
 		nf.SetVerdict(id, nfqueue.NfAccept)
 		return 0
@@ -58,9 +57,5 @@ func nfqueueListener() {
 }
 
 func convertPacketToString(data []byte) string {
-	decoded, err := hex.DecodeString(string(data))
-	if err != nil {
-		return err.Error()
-	}
-	return string(decoded)
+	return fmt.Sprintf("%x", data)
 }
