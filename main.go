@@ -54,6 +54,8 @@ func nfqueueListener() {
 			fmt.Printf("nfqueue payload: %s \n", convertPacketToString(*a.Payload))
 		} else {
 			fmt.Printf("%+v \n", packet)
+			fmt.Println()
+			fmt.Printf("IP: %+v", *packet.IP)
 		}
 
 		nf.SetVerdict(id, nfqueue.NfAccept)
