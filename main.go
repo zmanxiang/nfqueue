@@ -53,6 +53,7 @@ func nfqueueListener() {
 				// Now we can access Body.Data
 				fmt.Println("data string")
 				fmt.Println(string(body.Data))
+				fmt.Println(msg.Body)
 			}
 		}
 
