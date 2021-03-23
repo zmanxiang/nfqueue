@@ -17,10 +17,6 @@ import (
 	"time"
 )
 
-const (
-	ProtocolICMP = 1
-)
-
 func main() {
 	for {
 		nfqueueListener()
@@ -57,7 +53,7 @@ func nfqueueListener() {
 			fmt.Println(err)
 			fmt.Printf("nfqueue payload: %s \n", convertPacketToString(*a.Payload))
 		} else {
-			fmt.Printf("%+v \n", packet)
+			fmt.Printf("%+v \n", packet.Gopacket.Dump())
 		}
 
 		nf.SetVerdict(id, nfqueue.NfAccept)
