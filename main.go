@@ -26,7 +26,7 @@ func main() {
 
 func nfqueueListener() {
 	config := nfqueue.Config{
-		NfQueue:      100,
+		NfQueue:      101,
 		MaxPacketLen: 0xFFFF,
 		MaxQueueLen:  0xFF,
 		Copymode:     nfqueue.NfQnlCopyPacket,
