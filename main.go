@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/hex"
 	"errors"
+	"flag"
 	"fmt"
 	"github.com/florianl/go-nfqueue"
 	"github.com/google/gopacket"
@@ -20,13 +21,15 @@ import (
 func main() {
 	for {
 		nfqueueListener()
-		time.Sleep(10 * time.Second)
 	}
 }
 
 func nfqueueListener() {
+	numbPtr := flag.Uint("queueNum", 0, "an int")
+	queueNum := uint16(*numbPtr)
+	fmt.Printf("listening to queueNum: %d \n", queueNum)
 	config := nfqueue.Config{
-		NfQueue:      100,
+		NfQueue:      queueNum,
 		MaxPacketLen: 0xFFFF,
 		MaxQueueLen:  0xFF,
 		Copymode:     nfqueue.NfQnlCopyPacket,
@@ -41,9 +44,7 @@ func nfqueueListener() {
 	}
 	defer nf.Close()
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
-
+	ctx := context.Background()
 	fn := func(a nfqueue.Attribute) int {
 		id := *a.PacketID
 		// Just print out the id and payload of the nfqueue packet
