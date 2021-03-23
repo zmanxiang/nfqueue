@@ -49,12 +49,11 @@ func nfqueueListener() {
 			fmt.Printf("nfqueue payload: %s \n", convertPacketToString(*a.Payload))
 		} else {
 			fmt.Printf("%+v \n", *msg)
-			if body, err := msg.Body.(*icmp.Echo); err {
+			if body, err := msg.Body.(*icmp.RawBody); err {
 				// Now we can access Body.Data
 				fmt.Println("data string")
 				fmt.Println(string(body.Data))
 			}
-			fmt.Printf("body: %s", msg.Body)
 		}
 
 		nf.SetVerdict(id, nfqueue.NfAccept)
