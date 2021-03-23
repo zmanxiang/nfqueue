@@ -20,7 +20,6 @@ import (
 func main() {
 	for {
 		nfqueueListener()
-		fmt.Println("===== waiting for 10 seconds =====")
 		time.Sleep(10 * time.Second)
 	}
 }
@@ -59,6 +58,8 @@ func nfqueueListener() {
 		}
 
 		nf.SetVerdict(id, nfqueue.NfAccept)
+		fmt.Println()
+		fmt.Println("=============")
 		return 0
 	}
 
