@@ -48,7 +48,7 @@ func nfqueueListener() {
 			fmt.Println(err)
 			fmt.Printf("nfqueue payload: %s \n", convertPacketToString(*a.Payload))
 		} else {
-			fmt.Printf("%+v \n", msg)
+			fmt.Printf("%+v \n", *msg)
 		}
 
 		nf.SetVerdict(id, nfqueue.NfAccept)
