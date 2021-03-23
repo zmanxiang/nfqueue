@@ -4,7 +4,12 @@ import (
 	"context"
 	"fmt"
 	"github.com/florianl/go-nfqueue"
+	"golang.org/x/net/icmp"
 	"time"
+)
+
+const (
+	ProtocolICMP = 1
 )
 
 func main() {
@@ -38,9 +43,14 @@ func nfqueueListener() {
 	fn := func(a nfqueue.Attribute) int {
 		id := *a.PacketID
 		// Just print out the id and payload of the nfqueue packet
-		fmt.Printf("nfqueue payload: %s \n", convertPacketToString(*a.Payload))
-		fmt.Printf("hwAddress: %s \n", convertPacketToString(*a.HwAddr))
-		fmt.Printf("hwProtocoal: %+v \n", *a.HwProtocol)
+		msg, err := icmp.ParseMessage(ProtocolICMP, *a.Payload)
+		if err != nil {
+			fmt.Println(err)
+			fmt.Printf("nfqueue payload: %s \n", convertPacketToString(*a.Payload))
+		} else {
+			fmt.Printf("%+v \n", msg)
+		}
+
 		nf.SetVerdict(id, nfqueue.NfAccept)
 		return 0
 	}
