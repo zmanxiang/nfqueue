@@ -19,9 +19,10 @@ import (
 )
 
 func main() {
-	numbPtr := flag.Int("queueNum", 0, "an int")
-	fmt.Println(*numbPtr)
-	queueNum := uint16(*numbPtr)
+	var svar uint
+	flag.UintVar(&svar, "queue", 0, "a uint var")
+	fmt.Println(svar)
+	queueNum := uint16(svar)
 
 	for {
 		nfqueueListener(queueNum)
