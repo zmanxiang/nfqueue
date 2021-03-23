@@ -24,7 +24,7 @@ func main() {
 	//queueNum := uint16(svar)
 
 	for {
-		nfqueueListener(100)
+		nfqueueListener(101)
 	}
 }
 
