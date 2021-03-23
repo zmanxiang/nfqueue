@@ -26,6 +26,7 @@ func main() {
 
 func nfqueueListener() {
 	numbPtr := flag.Uint("queueNum", 0, "an int")
+	fmt.Println(*numbPtr)
 	queueNum := uint16(*numbPtr)
 	fmt.Printf("listening to queueNum: %d \n", queueNum)
 	config := nfqueue.Config{
