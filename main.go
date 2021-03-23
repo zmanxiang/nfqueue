@@ -19,15 +19,16 @@ import (
 )
 
 func main() {
-	for {
-		nfqueueListener()
-	}
-}
-
-func nfqueueListener() {
 	numbPtr := flag.Int("queueNum", 0, "an int")
 	fmt.Println(*numbPtr)
 	queueNum := uint16(*numbPtr)
+
+	for {
+		nfqueueListener(queueNum)
+	}
+}
+
+func nfqueueListener(queueNum uint16) {
 	fmt.Printf("listening to queueNum: %d \n", queueNum)
 	config := nfqueue.Config{
 		NfQueue:      queueNum,
