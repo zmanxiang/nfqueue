@@ -5,7 +5,6 @@ import (
 	"context"
 	"encoding/hex"
 	"errors"
-	"flag"
 	"fmt"
 	"github.com/florianl/go-nfqueue"
 	"github.com/google/gopacket"
@@ -19,13 +18,13 @@ import (
 )
 
 func main() {
-	var svar uint
-	flag.UintVar(&svar, "queue", 0, "a uint var")
-	fmt.Println(svar)
-	queueNum := uint16(svar)
+	//var svar uint
+	//flag.UintVar(&svar, "queue", 0, "a uint var")
+	//fmt.Println(svar)
+	//queueNum := uint16(svar)
 
 	for {
-		nfqueueListener(queueNum)
+		nfqueueListener(100)
 	}
 }
 
