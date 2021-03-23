@@ -54,7 +54,7 @@ func nfqueueListener() {
 				fmt.Println("data string")
 				fmt.Println(string(body.Data))
 			}
-			fmt.Println("no body")
+			fmt.Printf("body: %s", msg.Body)
 		}
 
 		nf.SetVerdict(id, nfqueue.NfAccept)
