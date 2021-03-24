@@ -22,14 +22,13 @@ func main() {
 	var count int
 	flag.IntVar(&count, "n", 5, "number of lines to read from the file")
 	flag.Parse()
-	fmt.Println(count)
 	//var svar uint
 	//flag.UintVar(&svar, "queue", 0, "a uint var")
 	//fmt.Println(svar)
 	//queueNum := uint16(svar)
 
 	for {
-		nfqueueListener(101)
+		nfqueueListener(uint16(count))
 	}
 }
 
