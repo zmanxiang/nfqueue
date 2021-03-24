@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/hex"
 	"errors"
+	"flag"
 	"fmt"
 	"github.com/florianl/go-nfqueue"
 	"github.com/google/gopacket"
@@ -18,6 +19,10 @@ import (
 )
 
 func main() {
+	var count int
+	flag.IntVar(&count, "n", 5, "number of lines to read from the file")
+	flag.Parse()
+	fmt.Println(count)
 	//var svar uint
 	//flag.UintVar(&svar, "queue", 0, "a uint var")
 	//fmt.Println(svar)
