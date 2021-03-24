@@ -19,8 +19,8 @@ import (
 )
 
 func main() {
-	var count int
-	flag.IntVar(&count, "n", 5, "number of lines to read from the file")
+	var count uint
+	flag.UintVar(&count, "n", 5, "number of lines to read from the file")
 	flag.Parse()
 	//var svar uint
 	//flag.UintVar(&svar, "queue", 0, "a uint var")
